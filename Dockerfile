@@ -18,6 +18,11 @@ RUN adduser jenkins
 # Set password for the jenkins user (you may want to alter this).
 RUN echo "jenkins:jenkins" | chpasswd
 
+# Add ssh base keys to run sshd
+RUN ssh-keygen -b 1024 -t rsa -f /etc/ssh/ssh_host_key -q -N ""
+RUN ssh-keygen -b 1024 -t rsa -f /etc/ssh/ssh_host_rsa_key -q -N ""
+RUN ssh-keygen -b 1024 -t dsa -f /etc/ssh/ssh_host_dsa_key -q -N ""
+
 # Standard SSH port
 EXPOSE 22
 
